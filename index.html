@@ -1,1 +1,58 @@
-test
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting...</title>
+  <script type="text/javascript">
+    // URL 파라미터를 읽는 함수
+    function getQueryParams() {
+      var params = {};
+      var search = window.location.search.substring(1);
+      if (search) {
+        var pairs = search.split("&");
+        for (var i = 0; i < pairs.length; i++) {
+          var pair = pairs[i].split("=");
+          params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+        }
+      }
+      return params;
+    }
+
+    // 리디렉션을 수행하는 함수
+    function redirect() {
+      var params = getQueryParams();
+
+      // 주소 배열
+      var urls = [
+        "https://hallagroup.sharepoint.com/:x:/s/00005.10GMN000000204/EbppxfJA7T1GkfVmqWAHda0BffSHf-B4ZJqw4vhe5uK-9w?e=ANvjw2", // index 0
+        "https://hallagroup.sharepoint.com/:x:/s/00005.10GMN000000204/EbppxfJA7T1GkfVmqWAHda0BffSHf-B4ZJqw4vhe5uK-9w?e=ANvjw2&ActiveCell=IDB2-A02!A2" // index 1
+      ];
+
+      // i 파라미터 값으로 주소 선택, 기본 값은 첫 번째 주소
+      var index = parseInt(params.i);
+      var baseUrl = urls[index];
+
+      // i 파라미터를 제외한 나머지 파라미터들을 쿼리 스트링으로 구성
+      var queryParams = Object.keys(params)
+        .filter(key => key !== 'i')
+        .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+        .join('&');
+
+      // 최종 리디렉션 URL
+      var redirectUrl = baseUrl + (queryParams ? '?' + queryParams : '');
+      
+      // 리디렉션 수행
+      window.location.href = redirectUrl;
+    }
+
+    // 페이지 로드 시 리디렉션 수행
+    window.onload = redirect;
+  </script>
+</head>
+<body>
+  <p>If you are not redirected, <a id="redirect-link" href="#">click here</a>.</p>
+  <script type="text/javascript">
+    // 페이지 로드 시 리디렉션 링크 업데이트
+    document.getElementById('redirect-link').href = "javascript:redirect()";
+  </script>
+</body>
+</html>

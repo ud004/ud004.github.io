@@ -14,12 +14,12 @@
 
             // URL 파라미터 가져오기
             const urlParams = new URLSearchParams(window.location.search);
-            const pjt = urlParams.get('p');
+            const idx = urlParams.get('i');
             const ver = urlParams.get('v');
 
             // 디버깅용 콘솔 로그
             console.log('URL Parameters:', urlParams.toString());
-            console.log('Ecu:', pjt);
+            console.log('Ecu:', idx);
             console.log('Ver:', ver);
             console.log('baseUrls Length:', baseUrls.length);
 

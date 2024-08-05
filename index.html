@@ -8,19 +8,19 @@
         document.addEventListener("DOMContentLoaded", function() {
             // SharePoint URL 리스트 설정
             const baseUrls = [
-                "https://hallagroup.sharepoint.com/:x:/s/00005.10GMN000000204/EbppxfJA7T1GkfVmqWAHda0BffSHf-B4ZJqw4vhe5uK-9w?e=fsdxdL",
-                "https://hallagroup.sharepoint.com/:x:/s/00005.10GMN000000204/ER23VIJ8qS5OgEbO0Ht0L8kBQTl70FYX3OZ3_ubh1dsluA?e=4jPMKQ"
+                "https://hallagroup.sharepoint.com/:x:/s/00005.10GMN000000204/Ebk_UID3XJROixSlZfdS69wBSMWKy-mcXNFRjW5Lz5_0AQ?e=eVSJh7",    // IDB1
+                "https://hallagroup.sharepoint.com/:x:/s/00005.10GMN000000204/ETdiPuhdGVdJmzY9No40MPUBmIlGOcAzF4fJgOIZ0l88ow?e=c5N52M"    // IDB2
             ];
 
             // URL 파라미터 가져오기
             const urlParams = new URLSearchParams(window.location.search);
-            const idx = urlParams.get('i');
             const pjt = urlParams.get('p');
+            const ver = urlParams.get('v');
 
             // 디버깅용 콘솔 로그
             console.log('URL Parameters:', urlParams.toString());
-            console.log('Index:', idx);
-            console.log('Project:', pjt);
+            console.log('Ecu:', pjt);
+            console.log('Ver:', ver);
             console.log('baseUrls Length:', baseUrls.length);
 
             // 기본값 설정 및 유효성 검사
@@ -29,9 +29,9 @@
             console.log('Redirect URL:', redirectUrl);
 
             // ActiveCell 파라미터 추가
-            if (pjt) {
+            if (ver) {
                 console.log('test')
-                redirectUrl += `&ActiveCell=${encodeURIComponent(pjt)}!A1`;
+                redirectUrl += `&ActiveCell=${encodeURIComponent(ver)}!A1`;
                 console.log('test')
             }
 
